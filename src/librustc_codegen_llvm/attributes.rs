@@ -173,6 +173,7 @@ pub fn from_fn_attrs(
 
     set_frame_pointer_elimination(cx, llfn);
     set_probestack(cx, llfn);
+    Attribute::NonLazyBind.apply_llfn(Function, llfn);
 
     if codegen_fn_attrs.flags.contains(CodegenFnAttrFlags::COLD) {
         Attribute::Cold.apply_llfn(Function, llfn);
