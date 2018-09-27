@@ -1484,6 +1484,7 @@ impl<'cx, 'gcx, 'tcx> SelectionContext<'cx, 'gcx, 'tcx> {
         Ok(candidates)
     }
 
+    // OSSI: THIS IS WHERE THE TRAIT ISN'T BEING RESOLVED
     fn assemble_candidates_from_projected_tys(&mut self,
                                               obligation: &TraitObligation<'tcx>,
                                               candidates: &mut SelectionCandidateSet<'tcx>)
@@ -1502,6 +1503,7 @@ impl<'cx, 'gcx, 'tcx> SelectionContext<'cx, 'gcx, 'tcx> {
         }
 
         let result = self.probe(|this, snapshot|
+            // OSSI: THIS FUNCTION ISN'T WORKING
             this.match_projection_obligation_against_definition_bounds(obligation,
                                                                        snapshot)
         );
@@ -1548,6 +1550,7 @@ impl<'cx, 'gcx, 'tcx> SelectionContext<'cx, 'gcx, 'tcx> {
                 bounds={:?}",
                bounds);
 
+        // OSSI: YOU ARE HERE 1
         let matching_bound =
             util::elaborate_predicates(self.tcx(), bounds.predicates)
             .filter_to_traits()
